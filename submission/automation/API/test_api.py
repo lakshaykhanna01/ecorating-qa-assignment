@@ -4,17 +4,12 @@ import pytest
 
 BASE_URL = "http://localhost:3001"
 
-# -------------------------
-# Test Users
-# -------------------------
+
 USERS = [
     {"role": "Analyst", "email": "analyst@test.com", "password": "TestPass123!"},
     {"role": "Admin", "email": "admin@test.com", "password": "AdminPass123!"}
 ]
 
-# -------------------------
-# Helper Functions
-# -------------------------
 def login(email, password):
     resp = requests.post(
         f"{BASE_URL}/api/v1/auth/login",
@@ -22,10 +17,6 @@ def login(email, password):
     )
     assert resp.status_code == 200
     return resp.json()["token"]
-
-# -------------------------
-# Tests
-# -------------------------
 
 @pytest.mark.parametrize("user", USERS)
 def test_role_based_access_to_admin_upload(user):
@@ -42,10 +33,8 @@ def test_role_based_access_to_admin_upload(user):
     )
 
     if user["role"] == "Admin":
-        # Admin reaches validation layer (CSV missing is acceptable)
         assert resp.status_code in [200, 400]
     else:
-        # Analyst must be blocked
         assert resp.status_code in [401, 403]
 
 
