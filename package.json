@@ -1,0 +1,28 @@
+{
+  "name": "ecoratings-qa-assignment",
+  "version": "1.0.0",
+  "description": "Test Engineer assignment, This is a practical testing challenge designed to evaluate your testing skills across manual testing, automation, and performance testing.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajayEcoratings/ecoratings-qa-assignment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ajayEcoratings/ecoratings-qa-assignment/issues"
+  },
+  "homepage": "https://github.com/ajayEcoratings/ecoratings-qa-assignment#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "cypress": "^15.9.0"
+  }
+}
