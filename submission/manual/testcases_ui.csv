@@ -1,1 +1,13 @@
-
+TestCaseID	TestCaseTitle	Preconditions	TestSteps	ExpectedResult	Priority
+UI-001	Verify mock API server page loads	Mock API server is running	Open browser and navigate to http://localhost:3001	Page loads successfully showing server running message	High
+UI-002	Verify server running success message is displayed	Mock API server is running	Open homepage and observe top banner	Green success message "Mock API Server is running" is displayed	High
+UI-003	Verify API endpoints section is visible	Mock API server is running	Scroll to Available API Endpoints section	All API endpoints are listed correctly	High
+UI-004	Verify login API endpoint is listed	Mock API server is running	Check API list for POST /api/v1/auth/login	Login endpoint is displayed with correct method	High
+UI-005	Verify logout API endpoint is listed	Mock API server is running	Check API list for POST /api/v1/auth/logout	Logout endpoint is displayed correctly	High
+UI-006	Verify ESG question submission endpoint visibility	Mock API server is running	Locate POST /api/v1/qa endpoint	QA submission endpoint is visible	High
+UI-007	Verify job status endpoint visibility	Mock API server is running	Locate GET /api/v1/qa/{jobId}	Job status endpoint is visible	High
+UI-008	Verify admin upload endpoint visibility	Mock API server is running	Locate POST /api/v1/admin/companies/upload	Admin upload endpoint is visible	High
+UI-009	Verify WebSocket endpoint is displayed	Mock API server is running	Scroll to WebSocket section	WebSocket URL ws://localhost:3001 is displayed	High
+UI-010	Verify test user credentials are displayed	Mock API server is running	Scroll to Test User Accounts section	Analyst and Admin credentials are visible	High
+UI-011	Verify curl login example is displayed	Mock API server is running	Scroll to Quick API Test section	curl login command is visible	Medium
+UI-012	Verify page reload works correctly	Mock API server is running	Refresh browser page	Page reloads without error	Medium
