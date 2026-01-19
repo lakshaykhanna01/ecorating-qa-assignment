@@ -1,93 +1,94 @@
+Sustaining.ai Lite – QA Assignment
+How to Run the Tests
+Manual Testing
 
-# Sustaining.ai Lite - QA Assignment Test Suite
+Go to submission/manual
 
-## How to Run the Tests
+Files included:
 
-### 1. Manual Test Cases
-- Open the `/submission/manual` folder.
-- Review:
-  - `test-plan.md` – overall strategy, risks, test data.
-  - `test-cases-ui.csv` – UI test cases.
-  - `test-cases-api.csv` – API test cases.
-  - `bug-reports.csv` – documented bugs.
-- Execute manually as described in test steps.
+test-plan.md – test approach, scope, risks
 
-### 2. UI Automation (Playwright)
-1. Ensure **Node.js** is installed and mock API server is running:  
-   ```bash
-   cd mock-api
-   npm install
-   npm start
-Install Playwright dependencies (from project root):
+testcases_ui.csv – UI test cases
 
-bash
-Copy code
-npm install -D @playwright/test
-npx playwright install
-Run tests:
+testcases_api.csv – API test cases
 
-bash
-Copy code
-npx playwright test submission/automation/UI/ui.spec.ts
-Test coverage: login, submit question, stream status → result, role-based access.
+bug_report.csv – bugs found with steps and severity
 
-3. API Automation (Pytest + Requests)
-Python must be installed.
+Follow the steps mentioned in each test case to execute manually.
 
-Navigate to /submission/automation/api.
+API Automation (Pytest)
 
-Install required packages:
+Pre-requisite: Python installed and mock API server running on http://localhost:3001
 
-bash
-Copy code
+Steps:
+
+cd submission/automation/API
 pip install pytest requests
-Run tests:
+python -m pytest -v test_api.py
 
-bash
-Copy code
-pytest -v test_api.py
-Coverage includes authentication, QA flows, AIML service, and file upload with positive & negative scenarios.
 
-4. Performance & Resilience (k6)
-Navigate to /submission/perf.
+Covers:
 
-Run test:
+Login and authentication
 
-bash
-Copy code
+Role-based access (Analyst vs Admin)
+
+Submit ESG question and poll job status
+
+Recent answers API
+
+AIML rate-limit behavior
+
+Performance Testing (k6)
+
+Pre-requisite: k6 installed
+
+Steps:
+
+cd submission/performance/perf
 k6 run k6-script.js
-The test simulates 5→20 RPS load on /qa endpoints for 10–15 minutes, polls job status, and checks results.
 
-Assumptions Made
-Mock API server (http://localhost:3001) is running for all tests.
 
-Analyst and Admin accounts exist:
+This test:
+
+Sends POST requests to /api/v1/qa
+
+Ramps load from 5 to 20 RPS
+
+Polls /api/v1/qa/{jobId}
+
+Runs for ~10–15 minutes
+
+Assumptions
+
+Mock API server is running locally on port 3001
+
+Test users are available:
 
 Analyst: analyst@test.com / TestPass123!
 
 Admin: admin@test.com / AdminPass123!
 
-AIML service may return HTTP 429 if rate limit exceeded; scripts include retry handling.
+AIML service may return rate-limit errors when overloaded
 
-File uploads are limited to 2MB and CSV format.
+CSV upload size limit is 2MB
 
-Limitations Encountered
-API Automation could not be fully validated without Python installed in some environments.
+Limitations
 
-Some Playwright UI tests failed initially due to timing issues and element locators; fixed with data-testid selectors.
+Some environments had Python setup issues initially
 
-Performance tests do not simulate full network latency or large file uploads.
+WebSocket/SSE streaming was tested functionally but not fully automated
 
-WebSocket/SSE real-time streaming not fully visualized in automated tests.
+Performance testing does not include large file uploads or real network latency
 
-What Would Be Tested Next with More Time
-Full end-to-end integration of WebSocket/SSE real-time updates in UI automation.
+What I Would Test Next
 
-File upload validation with malformed or large datasets for Admin users.
+Full WebSocket/SSE automation for live job updates
 
-Advanced load and stress testing beyond 20 RPS for concurrency limits.
+Larger and malformed CSV uploads for Admin users
 
-Security & compliance tests for JWT expiry, XSS, CSRF, and input validation.
+Higher load and stress testing beyond 20 RPS
 
-Cross-browser UI testing and mobile responsiveness.
+Security scenarios (JWT expiry, invalid tokens, input validation)
 
+Cross-browser UI testing
