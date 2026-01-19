@@ -1,0 +1,23 @@
+TestCaseID,TestCaseTitle,Preconditions,TestSteps,ExpectedResult,Priority
+API-001,Login with valid credentials,Mock API server running,POST /api/v1/auth/login with analyst@test.com/TestPass123!,Returns 200 OK with token and user info,High
+API-002,Login with invalid credentials,Mock API server running,POST /api/v1/auth/login with wrong password,Returns 401 Unauthorized,High
+API-003,Logout after login,User logged in,POST /api/v1/auth/logout,"Session invalidated, token cannot be used for further requests",High
+API-004,Submit ESG question successfully,Analyst logged in,POST /api/v1/qa with valid question and company,Returns 202 with jobId,High
+API-005,Submit ESG question with empty field,Analyst logged in,POST /api/v1/qa with empty question,Returns 400 Bad Request,High
+API-006,Submit extremely long question (>10k chars),Analyst logged in,POST /api/v1/qa with 10k+ char question,Returns 413 Payload Too Large or validation error,Medium
+API-007,Get job status for existing job,Question submitted,GET /api/v1/qa/:jobId,"Returns job status: queued, running, done, or failed",High
+API-008,Get job result after completion,Job completed,GET /api/v1/qa/:jobId,"Returns result with answer, confidence ∈ [0,1]",High
+API-009,Get job with invalid jobId,Mock API server running,GET /api/v1/qa/:invalidJobId,Returns 404 Not Found,Medium
+API-010,AIML service successful response,AIML service running,POST /aiml/answer with valid question and company,"Returns 200 with answer and confidence ∈ [0,1]",High
+API-011,AIML service rate limit exceeded,AIML service running,POST /aiml/answer repeatedly >10/min,Returns 429 Too Many Requests,Medium
+API-012,AIML service invalid payload,AIML service running,POST /aiml/answer with malformed payload,Returns 400 Bad Request or 500 error,Medium
+API-013,Admin CSV upload valid file,Admin logged in,POST /api/v1/admin/companies/upload with correct CSV <2MB,"Returns 200 OK, processedRows = file rows",High
+API-014,Admin CSV upload invalid file type,Admin logged in,POST /api/v1/admin/companies/upload with .txt file,Returns 415 Unsupported Media Type,High
+API-015,Admin CSV upload oversized file (>2MB),Admin logged in,POST /api/v1/admin/companies/upload with large CSV,Returns 413 Payload Too Large,High
+API-016,Admin CSV upload malformed CSV,Admin logged in,POST /api/v1/admin/companies/upload with missing columns,Returns 400 Bad Request with validation errors,High
+API-017,Unauthorized upload attempt,No login or analyst role,POST /api/v1/admin/companies/upload,Returns 401 Unauthorized or 403 Forbidden,High
+API-018,Check last 10 answers,Analyst logged in,GET /api/v1/qa,Returns array of last 10 results for user,Medium
+API-019,Test session expiration,Analyst logged in,"Wait >1 hour, perform any API request",Returns 401 Unauthorized due to expired session,Medium
+API-020,Test invalid JWT token,Send request with modified/invalid token,Any secured API endpoint,Returns 401 Unauthorized,High
+API-021,Test network timeout,Interrupt network during GET /api/v1/qa/:jobId,Any API request,Client handles gracefully or retries,Medium
+API-022,Submit question with Unicode chars,Analyst logged in,POST /api/v1/qa with Unicode text,"Server handles properly, returns valid response",Medium
