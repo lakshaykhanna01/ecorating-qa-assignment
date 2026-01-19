@@ -1,0 +1,11 @@
+BugID	BugTitle	StepsToReproduce	ActualResult	ExpectedResult	Severity
+BUG-001	Authentication token usage not documented	1. Open homepage 2. Review login instructions	No information on token usage after login	Token handling should be explained for authenticated APIs	Medium
+BUG-002	Admin-only endpoint not visually distinguished	1. Open homepage 2. View API endpoints list	Admin endpoint appears same as public endpoints	Admin-only endpoints should be clearly marked	Low
+BUG-003	No user-friendly error when server is stopped	1. Stop mock API server 2. Refresh page	Browser shows generic connection error	A user-friendly error message should appear	Medium
+BUG-004	WebSocket usage instructions missing	1. Open homepage 2. Scroll to WebSocket section	Only WebSocket URL is displayed without usage steps	Connection and usage steps should be provided	Low
+BUG-005	Login API lacks example response	1. Check login API documentation section	No sample success or failure response is shown	Example API responses should be documented	Medium
+BUG-006	Submit ESG question with extremely long input fails silently	1. POST /api/v1/qa with question greater than 10k characters	Server crashes or returns generic 500 error	Should return 413 Payload Too Large or validation error	High
+BUG-007	Submit ESG question with invalid or malformed JSON	1. Send POST request to /api/v1/qa 2. Provide malformed JSON body	Server returns 500 Internal Server Error	Should return 400 Bad Request with validation error message	High
+BUG-008	AIML service times out for slow processing	1. POST /aiml/answer with complex question	Server hangs and no response after 10 seconds	Should return 504 Gateway Timeout or handled timeout error	Medium
+BUG-009	Unauthorized user can access admin upload endpoint	1. Login as Analyst 2. POST /api/v1/admin/companies/upload	Returns 403 Forbidden	Should block unauthorized roles consistently	High
+BUG-010	QA job status returns inconsistent data	1. Submit question 2. Immediately GET /api/v1/qa/{jobId}	Status shows done but result is null	Should remain queued or running until result exists	Medium
