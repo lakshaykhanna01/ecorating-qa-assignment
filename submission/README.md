@@ -1,94 +1,108 @@
 Sustaining.ai Lite – QA Assignment
-How to Run the Tests
-Manual Testing
+1. How to Run the Tests
+1.1 Manual Testing
 
-Go to submission/manual
-
-Files included:
-
-test-plan.md – test approach, scope, risks
+.Navigate to submission/manual
+.Review the following files:
+.test-plan.md – overall test approach and scope
 
 testcases_ui.csv – UI test cases
 
 testcases_api.csv – API test cases
 
-bug_report.csv – bugs found with steps and severity
+bug_report.csv – bugs with steps, severity, and results
 
-Follow the steps mentioned in each test case to execute manually.
+Execute test cases manually as per the documented steps
 
-API Automation (Pytest)
+1.2 API Automation (Pytest)
 
-Pre-requisite: Python installed and mock API server running on http://localhost:3001
+Ensure Python is installed
 
-Steps:
+Start the mock API server on http://localhost:3001
+
+Navigate to:
 
 cd submission/automation/API
+
+
+Install dependencies:
+
 pip install pytest requests
+
+
+Run tests:
+
 python -m pytest -v test_api.py
 
 
-Covers:
+Coverage includes:
 
 Login and authentication
 
-Role-based access (Analyst vs Admin)
+Role-based access (Admin vs Analyst)
 
-Submit ESG question and poll job status
+Submit ESG questions and poll job status
 
-Recent answers API
+Fetch recent answers
 
-AIML rate-limit behavior
+AIML rate-limit handling
 
-Performance Testing (k6)
+1.3 Performance Testing (k6)
 
-Pre-requisite: k6 installed
+Ensure k6 is installed
 
-Steps:
+Navigate to:
 
 cd submission/performance/perf
+
+
+Run the test:
+
 k6 run k6-script.js
 
 
-This test:
+Test behavior:
 
-Sends POST requests to /api/v1/qa
+Load ramp from 5 to 20 RPS
 
-Ramps load from 5 to 20 RPS
+POST /api/v1/qa
 
-Polls /api/v1/qa/{jobId}
+Poll /api/v1/qa/{jobId}
 
-Runs for ~10–15 minutes
+Duration ~10–15 minutes
 
-Assumptions
+2. Assumptions Made
 
-Mock API server is running locally on port 3001
+Mock API server is running on http://localhost:3001
 
-Test users are available:
+Test accounts are available:
 
 Analyst: analyst@test.com / TestPass123!
 
 Admin: admin@test.com / AdminPass123!
 
-AIML service may return rate-limit errors when overloaded
+AIML service may return 429 errors under load
 
 CSV upload size limit is 2MB
 
-Limitations
+3. Limitations Encountered
 
-Some environments had Python setup issues initially
+Python setup issues in some environments
 
-WebSocket/SSE streaming was tested functionally but not fully automated
+WebSocket/SSE updates not fully automated
 
-Performance testing does not include large file uploads or real network latency
+Performance tests do not include real network latency
 
-What I Would Test Next
+Large file upload scenarios not load-tested
 
-Full WebSocket/SSE automation for live job updates
+4. What I Would Test Next
 
-Larger and malformed CSV uploads for Admin users
+End-to-end WebSocket/SSE automation
 
-Higher load and stress testing beyond 20 RPS
+Admin CSV upload with invalid and large files
 
-Security scenarios (JWT expiry, invalid tokens, input validation)
+Stress testing beyond 20 RPS
 
-Cross-browser UI testing
+Security testing (JWT expiry, invalid tokens)
+
+Cross-browser and responsive UI testing
