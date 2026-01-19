@@ -1,6 +1,6 @@
 # Test Plan – Sustaining.ai Lite (Mock API)
 
-## 1. Scope
+## 1. What will be tested
 The scope of testing includes validation of the mock backend API for Sustaining.ai Lite.  
 The following functionalities will be tested:
 
@@ -16,7 +16,7 @@ The following functionalities will be tested:
 
 ---
 
-## 2. Risks
+## 2. High Risk areas
 High-risk areas that require focused testing:
 
 - Authentication and authorization failures
@@ -85,7 +85,7 @@ The following test data will be used:
 
 ---
 
-## 7. Tools
+## 7. Test Tools
 The following tools will be used during testing:
 
 - Postman – Manual and automated API testing
@@ -96,3 +96,4 @@ The following tools will be used during testing:
 - Git – Version control
 
 ---
+
