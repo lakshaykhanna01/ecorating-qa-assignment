@@ -3,7 +3,9 @@ Sustaining.ai Lite – QA Assignment
 1.1 Manual Testing
 
 Navigate to submission/manual
+
 Review the following files:
+
 test-plan.md – overall test approach and scope
 
 testcases_ui.csv – UI test cases
