@@ -1,5 +1,7 @@
 Sustaining.ai Lite – QA Assignment
 1. How to Run the Tests
+
+   
 1.1 Manual Testing
 
 Navigate to submission/manual
